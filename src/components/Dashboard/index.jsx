@@ -18,7 +18,6 @@ export default function Dashboard() {
           <SpendingBreakdown />
         </Grid>
       </Grid>
-      
       <RecentTransactions />
     </Box>
   );

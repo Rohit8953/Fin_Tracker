@@ -18,8 +18,16 @@ const TAB_LABELS = { "": "Dashboard", transactions: "Transactions", insights: "I
 export default function TopBar() {
   const dispatch = useDispatch();
   const { darkMode, role, activeTab, sidebarOpen } = useSelector((s) => s.ui);
+  const accessToken = localStorage.getItem('accessToken');
+  console.log("accessToken::", accessToken);
+  
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // console.log("userdetails: token", token);
+
+    // const {token,darkMode}=useSelector(state=>state.userdetails);
+    // const {role}=useSelector(state=>state.useractivity);
+
 
   return (
     <AppBar

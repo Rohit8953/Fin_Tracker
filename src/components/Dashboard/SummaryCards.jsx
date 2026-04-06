@@ -46,7 +46,7 @@ const StatCard = ({ title, value, subtitle, icon, gradient, trend }) => {
             {icon}
           </Box>
         </Box>
-        {trend !== undefined && (
+        {/* {trend !== undefined && (
           <Box sx={{ mt: 1.5, display: "flex", alignItems: "center", gap: 0.5 }}>
             <Box
               sx={{
@@ -63,7 +63,7 @@ const StatCard = ({ title, value, subtitle, icon, gradient, trend }) => {
             </Box>
             <Typography variant="caption" sx={{ color: "text.secondary" }}>vs last month</Typography>
           </Box>
-        )}
+        )} */}
       </CardContent>
       {/* Decorative circle */}
       <Box

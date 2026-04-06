@@ -64,7 +64,8 @@ const Login = () => {
       if (response) {
         navigate('/');
         dispatch(SetisLogin());
-        dispatch(Settoken(response.user.accessToken));
+        dispatch(Settoken(response?.user?.accessToken));
+        localStorage.setItem('accessToken', response?.user?.accessToken)
       }
     } catch (error) {
       console.error('Error during login:', error.message);

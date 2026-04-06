@@ -1,7 +1,9 @@
 
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Settoken } from "../../store/userSlice";
 
 const styles = {
   // ---------- Reset & Root ----------
@@ -679,6 +681,7 @@ const STATS = [
 export default function LandingPage({ onGetStarted }) {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -686,14 +689,24 @@ export default function LandingPage({ onGetStarted }) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const accessToken = localStorage.getItem('accessToken');
+  console.log("accessToken::", accessToken);
 
   const handleClick=()=>{
+    if (accessToken) {
       navigate("/dashboard");
+    }else{
+      navigate("/login");
+    }
   }
+
+
+    //LOGOUT---->/ 
+    const handleLogOut=()=>{
+          dispatch(Settoken(null));
+          localStorage.removeItem('accessToken');
+          navigate('/');
+    }
 
   return (
     <div style={styles.root}>
@@ -703,7 +716,7 @@ export default function LandingPage({ onGetStarted }) {
         rel="stylesheet"
       />
 
-      {/* ───────────── NAVBAR ───────────── */}
+      {/* ───────────── NAVBAR5--- ───────────── */}
       <nav
         style={{
           ...styles.nav,
@@ -747,12 +760,18 @@ export default function LandingPage({ onGetStarted }) {
         >Dashboard</BtnGhost>
 
         <div style={styles.navActions}>
-          <BtnGhost onClick={()=>navigate('/login')}>Log in</BtnGhost>
+         {
+          accessToken ? (
+            <BtnGhost onClick={handleLogOut}>Log out</BtnGhost>
+          ):(
+            <BtnGhost onClick={()=>navigate('/login')}>Log in</BtnGhost>
+          )
+         }
           <BtnGold onClick={onGetStarted}>Get Started →</BtnGold>
         </div>
       </nav>
 
-      {/* ───────────── HERO ───────────── */}
+      {/* ───────────── HERO ─────────────/////------ */}
       <section style={styles.hero}>
         {/* Background orbs */}
         <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%)", top: -100, right: -100, pointerEvents: "none" }} />
@@ -789,7 +808,7 @@ export default function LandingPage({ onGetStarted }) {
         ))}
       </div>
 
-      {/* ───────────── FEATURES ───────────── */}
+      {/* ───────────── FEATURES ─>>──────────── */}
       <section style={styles.section} id="features">
         <div style={styles.sectionLabel}>✦ Core Features</div>
         <h2 style={styles.sectionTitle}>Everything you need to master your money</h2>

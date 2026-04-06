@@ -27,6 +27,10 @@ export default function Sidebar({ open, onClose }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
+  function handleClick (){
+    navigate("/");
+  }
+
   const handleNav = (tab) => {
     // navigate(`dashboard/${tab}`);
     dispatch(setActiveTab(tab));
@@ -47,7 +51,7 @@ export default function Sidebar({ open, onClose }) {
       }}
     >
       {/* Logo */}
-      <Box sx={{ px: 3, py: 3 }}>
+      <Box sx={{ px: 3, py: 3, cursor: "pointer" }} onClick={handleClick}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Box
             sx={{
